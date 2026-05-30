@@ -50,9 +50,15 @@ async function onSubmit(event) {
 
     createGallery(data.hits);
 
-    if (totalHits > 15) {
-      showLoadMoreButton();
-    }
+    const totalPages = Math.ceil(totalHits / 15);
+
+if (totalPages > 1) {
+  showLoadMoreButton();
+} else {
+  iziToast.info({
+    message: "We're sorry, but you've reached the end of search results.",
+  });
+}
   } catch (error) {
     iziToast.error({
       message: 'Something went wrong!',
@@ -64,7 +70,7 @@ async function onSubmit(event) {
 
 async function onLoadMore() {
   page += 1;
-
+  hideLoadMoreButton();
   showLoader();
 
   try {
@@ -75,11 +81,11 @@ async function onLoadMore() {
     const totalPages = Math.ceil(totalHits / 15);
 
     if (page >= totalPages) {
-      hideLoadMoreButton();
-
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
       });
+    } else {
+      showLoadMoreButton();
     }
 
     const card = document
