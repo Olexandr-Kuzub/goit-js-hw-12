@@ -1,0 +1,21 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #808080;
+    background-color: #ffffff;
+    width: 360px;
+    height: 300px;
+}
+
+.info {
+    display: flex;
+    column-gap: 20px;
+}
